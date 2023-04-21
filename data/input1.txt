@@ -1,0 +1,3 @@
+Hello, World!!
+This is a basic cli encryption and decryption program.
+I wrote it to learn how to handle cli arguments in java.
