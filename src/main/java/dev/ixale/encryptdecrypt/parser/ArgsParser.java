@@ -1,4 +1,4 @@
-package Parser;
+package dev.ixale.encryptdecrypt.parser;
 
 public interface ArgsParser {
     /**

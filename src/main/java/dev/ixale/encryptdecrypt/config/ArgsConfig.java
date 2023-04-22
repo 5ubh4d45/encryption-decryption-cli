@@ -2,6 +2,37 @@ package dev.ixale.encryptdecrypt.config;
 
 public class ArgsConfig {
 
+    public enum ArgsFlag {
+        // Flags for the program
+        MODE("-mode"),
+        KEY("-key"),
+        DATA("-data"),
+        IN("-in"),
+        OUT("-out"),
+        ALG("-alg");
+        private final String value;
+        ArgsFlag(String value) {
+            this.value = value;
+        }
+        public String getValue() {
+            return value;
+        }
+
+        /**
+         * Get the flag from the string value
+         * @param value the string value
+         * @return the flag
+         */
+        public static ArgsFlag fromString(String value) {
+            for (ArgsFlag flag : ArgsFlag.values()) {
+                if (flag.value.equals(value)) {
+                    return flag;
+                }
+            }
+            throw new IllegalArgumentException("Invalid flag: " + value);
+        }
+    }
+
     /**
      * The mode of the program. Can be either be ENCRYPT or DECRYPT
      */

@@ -1,6 +1,8 @@
-package Parser;
+package dev.ixale.encryptdecrypt.parser;
 
 import dev.ixale.encryptdecrypt.config.ArgsConfig;
+
+import java.util.Arrays;
 
 public class ArgsParserImpl implements ArgsParser{
     @Override
@@ -10,34 +12,25 @@ public class ArgsParserImpl implements ArgsParser{
         int unParsedArgsLength = unParsedArgs.length;
         String[] parsedArgs = new String[ARGS_TOTAL_LENGTH];
 
-        for (int i = 0; i < ARGS_TOTAL_LENGTH; i++) {
-            parsedArgs[i] = "";
-        }
+        Arrays.fill(parsedArgs, "");
 
         for (int i = 0; i < unParsedArgsLength; i++) {
             String s = unParsedArgs[i];
 
-            switch (s) {
-                case "-mode" -> {
-                    fillParsedArgs(unParsedArgs, i, parsedArgs, 0);
+            // refactor to use enum so that we can use switch expression instead of switch statement
+            // try converting to flags enum
+            try {
+                ArgsConfig.ArgsFlag flag = ArgsConfig.ArgsFlag.fromString(s);
+                switch (flag) {
+                    case MODE -> fillParsedArgs(unParsedArgs, i, parsedArgs, 0);
+                    case KEY -> fillParsedArgs(unParsedArgs, i, parsedArgs, 1);
+                    case DATA -> fillParsedArgs(unParsedArgs, i, parsedArgs, 2);
+                    case IN -> fillParsedArgs(unParsedArgs, i, parsedArgs, 3);
+                    case OUT -> fillParsedArgs(unParsedArgs, i, parsedArgs, 4);
+                    case ALG -> fillParsedArgs(unParsedArgs, i, parsedArgs, 5);
                 }
-                case "-key" -> {
-                    fillParsedArgs(unParsedArgs, i, parsedArgs, 1);
-                }
-                case "-data" -> {
-                    fillParsedArgs(unParsedArgs, i, parsedArgs, 2);
-                }
-                case "-in" -> {
-                    fillParsedArgs(unParsedArgs, i, parsedArgs, 3);
-                }
-                case "-out" -> {
-                    fillParsedArgs(unParsedArgs, i, parsedArgs, 4);
-                }
-                case "-alg" -> {
-                    fillParsedArgs(unParsedArgs, i, parsedArgs, 5);
-                }
-                default -> {
-                }
+            } catch (IllegalArgumentException e) {
+                // do nothing
             }
         }
 

@@ -1,4 +1,4 @@
-package dev.ixale.encryptdecrypt.Processor;
+package dev.ixale.encryptdecrypt.processor;
 
 public interface ArgsProcessor {
     /**

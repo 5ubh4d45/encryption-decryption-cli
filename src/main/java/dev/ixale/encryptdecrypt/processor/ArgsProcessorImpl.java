@@ -1,8 +1,8 @@
-package dev.ixale.encryptdecrypt.Processor;
+package dev.ixale.encryptdecrypt.processor;
 
-import dev.ixale.encryptdecrypt.Encryption.Cipher;
-import dev.ixale.encryptdecrypt.Encryption.ShiftCipher;
-import dev.ixale.encryptdecrypt.Encryption.UnicodeCipher;
+import dev.ixale.encryptdecrypt.encryption.Cipher;
+import dev.ixale.encryptdecrypt.encryption.ShiftCipher;
+import dev.ixale.encryptdecrypt.encryption.UnicodeCipher;
 import dev.ixale.encryptdecrypt.config.ArgsConfig;
 
 import java.io.File;
@@ -121,12 +121,8 @@ public class ArgsProcessorImpl implements ArgsProcessor{
     private static String handleEncryption(ArgsConfig.Mode mode, ArgsConfig.Algorithm algType, String data, int key) {
         Cipher cipher = null;
         switch (algType) {
-            case UNICODE -> {
-                cipher = new UnicodeCipher();
-            }
-            case SHIFT -> {
-                cipher = new ShiftCipher();
-            }
+            case UNICODE -> cipher = new UnicodeCipher();
+            case SHIFT -> cipher = new ShiftCipher();
         }
 
         if (cipher == null) throw new IllegalStateException("Unexpected value: " + algType);

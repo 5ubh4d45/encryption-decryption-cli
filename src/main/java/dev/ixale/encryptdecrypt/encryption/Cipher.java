@@ -1,4 +1,4 @@
-package dev.ixale.encryptdecrypt.Encryption;
+package dev.ixale.encryptdecrypt.encryption;
 
 
 public interface Cipher {
